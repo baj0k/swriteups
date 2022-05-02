@@ -1,5 +1,6 @@
-# Debloat
+# sWriteups
 A minimal blogging theme for Hugo static site generator.
+The name comes from the words simple and writeups combined together thus sWriteups. Also when you read the name in English pronunciation and Polish meaning it greatly references the quality of the project.
 
 Real-life example can be found at https://bajok.kretes.xyz.
 
