@@ -1,0 +1,23 @@
+{{ define "main" }}
+<main>
+    <article> {{ if or .Date .Params.tags .Params.categories }}
+        <div style="display:flex;justify-content:space-between">
+        <h1 style="margin: 15px 0 0 0">{{ .Title }}</h1>
+        <p style="margin:20px 0 0 0"> {{ if .Date }} <time> {{ .Date | time.Format ":date_long" }}</time> {{ end }}
+        </div>
+        <p> {{ with .Params.categories }} <b> Categories: {{ range first 1 . }}
+        <a href="{{ "/categories/" | relLangURL }}{{ . | urlize }}">{{ . }}</a> {{- end -}} {{- range after 1 . -}} ,
+        <a href="{{ "/categories/" | relLangURL }}{{ . | urlize }}">{{ . }}</a> {{- end -}} </b> | <b> {{ end }}
+        {{ with .Params.tags }} Tags: </b> {{ range first 1 . }}
+        <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a> {{- end -}} {{- range after 1 . -}} ,
+        <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a> {{- end -}} {{ end }}
+        </p> <hr> {{ end }} {{ .Content }}
+    </article> {{ if .Params.toc }}
+    <aside class="toc">
+        <h2> Table of Contents </h2> {{ .TableOfContents }}
+    </aside> {{ end }}
+</main> {{ $reg := (where .Site.RegularPages "Type" "in" .Section) }}
+    <div class="next-prev"> 
+        {{ with $reg.Prev . }} <a class="prev" href="{{ .Permalink }}" title="{{ .Title }}">« {{ .Title | truncate 50 "..." }}</a> {{ end }}
+        {{ with $reg.Next . }} <a class="next" href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title | truncate 50 "..." }} »</a> {{ end }}
+    </div> {{ if and (or ($reg.Prev .) ($reg.Next .)) (.Site.Params.issoUrl) }} {{ end }} {{ end }}

@@ -1,0 +1,8 @@
+<footer>
+        <p style="margin-top:20px">
+            Find me around the web:<br> {{- range first 1 .Site.Menus.footer }}
+            <a href="{{ .URL }}" target="_blank" rel="noreferrer"><b>{{ .Name }}</b></a> {{- end }} {{- range after 1 .Site.Menus.footer }}
+            | <a href="{{ .URL }}" target="_blank" rel="noreferrer"><b>{{ .Name }}</b></a> {{- end }} {{- range first 1 .Site.Menus.rss }}
+            <a style="float:right" href="{{ .URL }}" target="_blank" rel="noreferrer"><b>{{ .Name }}</b></a> {{- end }} <hr>
+        </p>
+</footer>
